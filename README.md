@@ -69,6 +69,12 @@ kafka-topics --describe \
 exit
 ```
 
+Результат:
+Topic: test_topic_1	TopicId: L2exEfjYTkGWcWk65sw8Ig	PartitionCount: 3	ReplicationFactor: 2	Configs: min.insync.replicas=2
+	Topic: test_topic_1	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1,2
+	Topic: test_topic_1	Partition: 1	Leader: 2	Replicas: 2,3	Isr: 2,3
+	Topic: test_topic_1	Partition: 2	Leader: 3	Replicas: 3,1	Isr: 3,1
+
 ### 3. Запуск консьюмеров (в отдельных терминалах)
 
 **Терминал 2 — SingleMessageConsumer:**

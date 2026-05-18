@@ -1,0 +1,31 @@
+# topic.txt — Команды для создания и проверки топика
+
+# ============================================================
+# 1. Команда создания топика
+# ============================================================
+# 3 партиции и 2 реплики
+docker exec -it kafka-1 /bin/bash
+kafka-topics \
+  --create \
+  --topic test_topic_1 \
+  --partitions 3 \
+  --replication-factor 2 \
+  --bootstrap-server localhost:29092
+#Выход
+exit
+
+# ============================================================
+# 2. Подробная информация о топике (вывод команды --describe)
+# ============================================================
+# Запустить:
+docker exec -it kafka-1 /bin/bash
+kafka-topics --describe --topic test_topic_1 --bootstrap-server localhost:29092
+
+#Выход
+exit
+
+# Пример ожидаемого вывода:
+# Topic: test_topic_1	TopicId: z91eXRCRRzKIbKpR-BRZ4w	PartitionCount: 3	ReplicationFactor: 2	Configs: min.insync.replicas=2
+# 	Topic: test_topic_1	Partition: 0	Leader: 3	Replicas: 3,1	Isr: 3,1
+# 	Topic: test_topic_1	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1,2
+# 	Topic: test_topic_1	Partition: 2	Leader: 2	Replicas: 2,3	Isr: 2,3

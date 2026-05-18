@@ -2,43 +2,34 @@
 
 Практическая работа по Apache Kafka — Яндекс Практикум, Спринт 1.
 
-## Описание классов
+### `Producer_log.py` — Kafka-продюсер
+Отправляет 100 сообщений в топик `test_topic_1`.  
+Гарантия доставки **At Least Once**: `acks="all"`, `retries=5`.
+Ошибки выводятсяна консоль и записываются в log файл.
 
-### `message.py` — `Message`
-Датакласс, представляющий одно сообщение.  
-Поля: `id` (UUID), `text`, `timestamp`, `source`.  
-Методы:
-- `Message.create(text, source)` — фабричный метод, генерирует id и timestamp.
-- `serialize() → bytes` — объект → JSON → UTF-8 bytes.
-- `Message.deserialize(bytes) → Message` — обратное преобразование.
-
-### `producer.py` — Kafka-продюсер
-Отправляет 30 сообщений в топик `practice-topic`.  
-Гарантия доставки **At Least Once**: `acks="all"`, `retries=5`.  
-Метод `send()` асинхронный; `flush()` и `close()` гарантируют отправку всего буфера.
-
-### `single_consumer.py` — `SingleMessageConsumer`
-Читает **по одному сообщению** за `poll()` (`max_poll_records=1`).  
+### `SingleMessageConsumer_log.py` — `SingleMessageConsumer`
+Читает **по одному сообщению** за `poll()`.  
 Оффсет коммитится **автоматически** (`enable_auto_commit=True`).  
-Принадлежит consumer group `single-consumer-group`.
+Принадлежит consumer group `test-group1`.
+Ошибки выводятсяна консоль и записываются в log файл.
 
-### `batch_consumer.py` — `BatchMessageConsumer`
+### `BatchMessageConsumer_log.py` — `BatchMessageConsumer`
 Накапливает в буфере минимум **10 сообщений** за несколько `poll()`.  
 После накопления обрабатывает пачку в цикле и **один раз коммитит оффсет вручную** (`consumer.commit(asynchronous=False)`).  
-Принадлежит независимой consumer group `batch-consumer-group`.
+Принадлежит независимой consumer group `test-group2`.
+Ошибки выводятсяна консоль и записываются в log файл.
 
 ---
 
 ## Структура проекта
 
 ```
-kafka_project/
-├── docker-compose.yml   # Kafka-кластер из 3 брокеров (KRaft)
+Kafka_Yandex/
+├── docker-compose.yml   # Kafka-кластер из 3 брокеров zookeeper
 ├── requirements.txt     # kafka-python
-├── message.py           # Класс сообщения
-├── producer.py          # Продюсер
-├── single_consumer.py   # Консьюмер (по одному)
-├── batch_consumer.py    # Консьюмер (пачками ≥10)
+├── Producer_log.py          # Продюсер
+├── SingleMessageConsumer_log.py   # Консьюмер (по одному)
+├── BatchMessageConsumer_log.py    # Консьюмер (пачками ≥10)
 ├── topic.txt            # Команда создания топика + describe
 └── README.md
 ```

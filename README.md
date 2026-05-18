@@ -84,7 +84,7 @@ python3 SingleMessageConsumer_log.py
 
 **Терминал 3 — BatchMessageConsumer:**
 ```bash
-python3 batch_consumer.py
+python3 BatchMessageConsumer_log.py
 ```
 
 ### 5. Запуск продюсера

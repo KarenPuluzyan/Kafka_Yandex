@@ -34,7 +34,6 @@ Kafka_Yandex/
 └── README.md
 ```
 
----
 
 ## Инструкция по запуску
 
@@ -69,7 +68,7 @@ kafka-topics --describe \
 exit
 ```
 
-```
+```bash
 Результат:
 Topic: test_topic_1	TopicId: L2exEfjYTkGWcWk65sw8Ig	PartitionCount: 3	ReplicationFactor: 2	Configs: min.insync.replicas=2
 	Topic: test_topic_1	Partition: 0	Leader: 1	Replicas: 1,2	Isr: 1,2
@@ -101,7 +100,7 @@ python3 Producer_log.py
 ## Как проверить, что всё работает
 
 1. **Producer** — в терминале 1 должны появиться строки вида:
-   ```
+```bash
    Отправлено сообщение номер 1:
     ...
    Доставлено в Топик: test_topic_1 Партиция: [0] Смещение: 1
@@ -109,7 +108,7 @@ python3 Producer_log.py
 ```
 
 2. **SingleConsumer** — в терминале 2 каждое сообщение обрабатывается отдельно:
-```
+```bash
 [default_consumer] Консьюмер запущен и ожидает сообщения...
 
 [default_consumer] --- Назначены новые партиции ---
@@ -142,7 +141,7 @@ python3 Producer_log.py
 ```
 
 3. **BatchConsumer** — в терминале 3 сообщения обрабатываются пачками:
-```
+```bash
 [default_consumer] Консьюмер запущен и ожидает сообщения...
 
 [default_consumer] --- Назначены новые партиции ---
